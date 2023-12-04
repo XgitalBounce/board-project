@@ -1,10 +1,12 @@
 package com.fastcampus.projectboard.controller;
 
+import com.fastcampus.projectboard.config.SecurityConfig;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -15,6 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @DisplayName("View 컨트롤러 - 게시글")
+@Import(SecurityConfig.class)
 @WebMvcTest(ArticleControllerTest.class)
 class ArticleControllerTest {
 
@@ -49,8 +52,8 @@ class ArticleControllerTest {
     public void givenNothing_whenRequestingArticleView_thenReturnsArticleView() throws Exception {
 
 
-        mvc.perform(get("/articles/1"))
-                .andExpect(status().isOk())
+        mvc.perform(MockMvcRequestBuilders.get("/articles/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(content().contentType(MediaType.TEXT_HTML))
                 .andExpect(model().attributeExists("article"))
                 .andExpect(model().attributeExists("articleComments"));
@@ -62,8 +65,8 @@ class ArticleControllerTest {
     public void givenNothing_whenRequestingArticleSearchView_thenReturnsArticleView() throws Exception {
 
 
-        mvc.perform(get("/articles/search"))
-                .andExpect(status().isOk())
+        mvc.perform(MockMvcRequestBuilders.get("/articles/search"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(content().contentType(MediaType.TEXT_HTML))
                 .andExpect(model().attributeExists("articles/search"));
 
@@ -74,8 +77,8 @@ class ArticleControllerTest {
     public void givenNothing_whenRequestingArticleHashtagSearchView_thenReturnsArticleHashtagView() throws Exception {
 
 
-        mvc.perform(get("/articles/search-hashtag"))
-                .andExpect(status().isOk())
+        mvc.perform(MockMvcRequestBuilders.get("/articles/search-hashtag"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(content().contentType(MediaType.TEXT_HTML))
                 .andExpect(model().attributeExists("articles/search-hashtag"));
 
