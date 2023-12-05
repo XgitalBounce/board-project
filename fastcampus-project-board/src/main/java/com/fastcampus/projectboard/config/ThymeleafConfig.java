@@ -23,6 +23,7 @@ public class ThymeleafConfig {
 
     @RequiredArgsConstructor
     @Getter
+    //@ConstructorBinding
     @ConfigurationProperties("spring.thymeleaf3")
     public static class Thymeleaf3Properties {
         /**
