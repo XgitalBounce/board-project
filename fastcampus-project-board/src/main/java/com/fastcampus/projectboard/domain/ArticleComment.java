@@ -34,6 +34,7 @@ public class ArticleComment extends AuditingFields {
     private Article article; // 게시글(ID)
     @Setter
     @ManyToOne(optional = false)
+    @JoinColumn(name = "userId")
     private UserAccount userAccount; // 유저 정보 (ID)
     @Setter
     @Column(nullable = false, length = 1000)
@@ -69,7 +70,7 @@ public class ArticleComment extends AuditingFields {
     public boolean equals (Object o){
         if (this == o) return true;
         if (!(o instanceof ArticleComment that)) return false;
-        return id != null && id.equals(that.id);
+        return id != null && id.equals(that.getId());
     }
 
     @Override
